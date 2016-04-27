@@ -51,7 +51,7 @@ session_start();
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
 <div id="content">
-    <img style="width: 40%" src="https://res.cloudinary.com/teepublic/image/private/s--XPaPGZnc--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1454323348/production/designs/409266_1">
+    <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/a1/99/c6/a199c69ed7f6b52943df06c06d092e29.jpg">
 </div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
