@@ -144,3 +144,8 @@ footer{
     height: 75px;
     -webkit-filter: invert(100%); filter: invert(100%);
 }
+.admintable {
+    border: 1px;
+    border-style: solid;
+    background-color: lightgray;
+}
