@@ -36,9 +36,23 @@ error_reporting(0); // disables all error messages.
         <div id="signIn">
             <?php
             if($_COOKIE['logUser'] != null){
+                $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+
+                $query = "SELECT * FROM users WHERE username = :username1";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute(array(
+                    'username1' => $_SESSION['username1']
+                ));
+                $result= $stmt->fetchAll();
+
+                foreach($result as $row) {
+                    $username1 = $row['username'];
+                    $image = $row['prof_image']; // use this as a profile photo so there's something to upload.
+                }
                 ?>
                 <ul>
                     <li><a href="logout.php">Log-Out</a></li>
+                    <li><a href="account.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
                     <li><a href="admin.php"><?php echo $_COOKIE['logUser']?></a></li>
                 </ul>
                 <?php
@@ -55,6 +69,7 @@ error_reporting(0); // disables all error messages.
     <br><br><br>
     <div id="navbar">
         <ul>
+            <li><a href="testform.php">Quiz</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="index.php">Home</a></li>
         </ul>
