@@ -1,11 +1,12 @@
 <?php
 session_start();
+error_reporting(0); // disables all error messages.
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Crowned Tailor</title>
-    <link rel="icon" href="images/CT-Logo2.png">
+    <link rel="icon" href="images/CT-icon.png">
     <link rel="stylesheet" type="text/css" href="primaryStyle.css">
 </head>
 <body>
