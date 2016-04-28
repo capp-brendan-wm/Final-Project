@@ -23,7 +23,6 @@
 
 <?php
   require_once('appvars.php');
-  require_once('connectvars.php');
 
   // Make sure the user is logged in before going any further.
   if (!isset($_SESSION['user_id'])) {
