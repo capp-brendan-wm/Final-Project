@@ -1,0 +1,56 @@
+/*Crowned Tailor Clothing Co. Website*/
+/*Login CSS*/
+
+/**************//**************//**************/
+/**************//**  GENERAL **//**************/
+/**************//**************//**************/
+body{
+    background-color: #a19e9f;
+}
+/**************//**************//**************/
+/**************//**  HEADER  **//**************/
+/**************//**************//**************/
+header{
+    text-align: center;
+}
+header img{
+    height: 120px;
+}
+
+/**************//**************//**************/
+/**************//**  CONTENT **//**************/
+/**************//**************//**************/
+#content{
+    text-align: center;
+    font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+
+/**************//**************//**************/
+/**************//**  FOOTER  **//**************/
+/**************//**************//**************/
+footer{
+    text-align: center;
+    font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1px;
+    color: #555555;
+}
+#lowLinks a{
+    font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #661314;
+}
+#lowLinks img{
+    height: 30px;
+    -webkit-filter: invert(100%); filter: invert(100%);
+}
