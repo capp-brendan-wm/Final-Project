@@ -68,6 +68,19 @@ error_reporting(0); // disables all error messages.
 
     <?php
 
+    if ($_GET['confirm'] == "yes") {
+        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+
+        $query = "DELETE * FROM users WHERE user_id = :user_id";
+        $stmt = $dbh->prepare($query);
+        $stmt->execute(array(
+            'user_id' => $_SESSION['user_id']
+        ));
+    }
+    if ($_GET['confirm'] == "no") {
+    header("location: admin.php");
+    }
+
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
 $query = "SELECT * FROM users";
@@ -89,17 +102,17 @@ foreach ($result as $row) {
     <td class='admintable'>Account Email " . $row['email'] . " </td>
     <td class='admintable'>Account Username: " . $row['username'] . " </td>
     <td class='admintable'>Account Password: " . $row['password'] . " </td>
-    <td class='admintable'><a href='admin.php?remove=". $row['user_id'] . "'>Remove user</a></td>"
+    <td class='admintable'><a href='admin.php?remove=". $row['user_id'] . "'>Remove user</a></td>";
 
        if ($_GET['remove'] == $row['user_id']) {
-           echo "<td class='admintable'>Confirm? " . $row['password'] . " </td>";
+           $_SESSION['user_id'] = $row['user_id'];
+           echo "<td class='admintable'>Confirm? <a href='admin.php?confirm=yes'>Yes </a><a href='admin.php?confirm=no'> No</a> </td>";
        }
-
-
     echo "</tr>";
-
 }
-    echo "</table>"
+    echo "</table>";
+    echo $_GET['confirm'] . "confirm <br>";
+    echo $_SESSION['user_id'] . "user_id";
     ?>
 
     <br>users<br>users<br>users<br>users<br>
