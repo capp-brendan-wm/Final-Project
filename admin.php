@@ -111,11 +111,7 @@ foreach ($result as $row) {
     echo "</tr>";
 }
     echo "</table>";
-    echo $_GET['confirm'] . "confirm <br>";
-    echo $_SESSION['user_id'] . "user_id";
     ?>
-
-    <br>users<br>users<br>users<br>users<br>
 </div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
