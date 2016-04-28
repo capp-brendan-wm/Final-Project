@@ -3,7 +3,7 @@
 
 <?php
 session_start();
-//error_reporting(0); // disables all error messages.
+error_reporting(0); // disables all error messages.
 
 if ($_SESSION['loggedIn'] == "") {
     $_SESSION['loggedIn'] = 0;
@@ -22,7 +22,7 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
     $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
 
-    $query = "SELECT * FROM subscription WHERE username1 = :username1";
+    $query = "SELECT * FROM subscription WHERE username = :username1";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
         'username1' => $_SESSION['username1']
@@ -30,7 +30,7 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
     $result= $stmt->fetchAll();
 
     foreach($result as $row) {
-        $username1 = $row['username1'];
+        $username1 = $row['username'];
         $image = $row['image']; // use this as a profile photo so there's something to upload.
     }
     $dbh = null;
@@ -62,7 +62,7 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
                         $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
                         // Write the data to the database
-                        $query = "UPDATE subscription SET image = :screenshot WHERE username1 = :username1";
+                        $query = "UPDATE subscription SET image = :screenshot WHERE username = :username1";
                         $stmt = $dbh->prepare($query);
                         $result = $stmt->execute(
                             array(
@@ -72,6 +72,7 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
                         );
 
                $image = $screenshot;
+
 
 
             }
@@ -101,7 +102,6 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
         <div id="nofloat" >
         <div id="account2"> <?php echo $_SESSION['username1'];?> </div>
-        <div id="account3"> Won X games, Lost X games. <br> W/L = X%</div>
         </div>
     </div>
     <div id="main">
@@ -114,8 +114,6 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
         </form>
 
     </div>
-    <div id="back" ><a href="chess.php"> Back to game </a></div>
-
         <?php
     //logged in
 
@@ -152,7 +150,7 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
     if ($_POST['username1'] != null && $_POST['password1'] != null) {
         $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
 
-        $query = "SELECT * FROM subscription WHERE username1 = :username1 AND password1 = :password1";
+        $query = "SELECT * FROM subscription WHERE username = :username1 AND password = :password1";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
             'username1' => $_POST['username1'],
@@ -162,7 +160,7 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
 
         foreach ($result as $row) {
             $_SESSION['loggedIn'] = 1;
-            $_SESSION['username1'] = $row['username1'];
+            $_SESSION['username1'] = $row['username'];
             header('location: account.php');
         }
         if ($row['id'] == "") {
@@ -187,6 +185,7 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] == "true") {
     <h1> Sign up </h1>
     <form method="post">
         Save your game <br>
+        Player Email: <input type="text" placeholder="email" name="email3"><br>
         Player Username: <input type="text" placeholder="username" name="username3"><br>
         Player Password: <input type="password" placeholder="password" name="password3"><br>
         <br>
@@ -198,10 +197,11 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] == "true") {
 if ($_POST['username3'] != null && $_POST['password3']) {
     $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
 //Write the data to the database
-    $query = "INSERT INTO subscription VALUES (0, :username3, :password3, NULL, Null, Null, NULL)";
+    $query = "INSERT INTO subscription VALUES (0, :email3, :username3, :password3, NULL )";
     $stmt = $dbh->prepare($query);
     $result = $stmt->execute(
         array(
+            'email3'    => $_POST['email3'],
             'username3' => $_POST['username3'],
             'password3' => $_POST['password3']
         ));
