@@ -20,9 +20,9 @@ if ($_GET['logout'] == "true") {
 
 if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
-    $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
+    $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-    $query = "SELECT * FROM subscription WHERE username = :username1";
+    $query = "SELECT * FROM users WHERE username = :username1";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
         'username1' => $_SESSION['username1']
@@ -31,7 +31,7 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
     foreach($result as $row) {
         $username1 = $row['username'];
-        $image = $row['image']; // use this as a profile photo so there's something to upload.
+        $image = $row['prof_image']; // use this as a profile photo so there's something to upload.
     }
     $dbh = null;
 
@@ -60,9 +60,9 @@ if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
                     // Connect to the database
 
-                        $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
+                        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
                         // Write the data to the database
-                        $query = "UPDATE subscription SET image = :screenshot WHERE username = :username1";
+                        $query = "UPDATE users SET prof_image = :screenshot WHERE username = :username1";
                         $stmt = $dbh->prepare($query);
                         $result = $stmt->execute(
                             array(
@@ -148,9 +148,9 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
 <?php
     //not logged in
     if ($_POST['username1'] != null && $_POST['password1'] != null) {
-        $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
+        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-        $query = "SELECT * FROM subscription WHERE username = :username1 AND password = :password1";
+        $query = "SELECT * FROM users WHERE username = :username1 AND password = :password1";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
             'username1' => $_POST['username1'],
@@ -163,7 +163,7 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
             $_SESSION['username1'] = $row['username'];
             header('location: account.php');
         }
-        if ($row['id'] == "") {
+        if ($row['username'] == "") {
         echo "<h3> You must enter a valid username and password. </h3>";
         }
     }
@@ -195,9 +195,9 @@ if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] == "true") {
     <?php
 
 if ($_POST['username3'] != null && $_POST['password3']) {
-    $dbh = new PDO('mysql:host=localhost;dbname=mydb', 'root', 'root');
+    $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 //Write the data to the database
-    $query = "INSERT INTO subscription VALUES (0, :email3, :username3, :password3, NULL )";
+    $query = "INSERT INTO users VALUES (0, :email3, :username3, :password3, NULL )";
     $stmt = $dbh->prepare($query);
     $result = $stmt->execute(
         array(
