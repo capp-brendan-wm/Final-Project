@@ -20,7 +20,7 @@
 <div id="content">
     <?php
     session_start();
-    error_reporting(0); // disables all error messages.
+    //error_reporting(0); // disables all error messages.
 
     if ($_SESSION['loggedIn'] == "") {
         $_SESSION['loggedIn'] = 0;
@@ -49,9 +49,13 @@
         foreach($result as $row) {
             $username1 = $row['username'];
             $image = $row['prof_image']; // use this as a profile photo so there's something to upload.
+            $email = $row['email'];
+            $password = $row['password'];
         }
         $dbh = null;
 
+
+if ($_POST['username'] != null || $_POST['password'] != null || $_POST['email'] != null || $_POST['screenshot'] != null) {
 
 
 
@@ -59,6 +63,17 @@
         $screenshot_size = $_FILES['screenshot']['size'];
         $screenshot_type = $_FILES['screenshot']['type'];
         define('MAXFILESIZE', 10000000);
+
+        if ($_POST['username'] == null) {
+        $_POST['username'] = $username1;
+        }
+
+        if ($_POST['email'] == null) {
+            $_POST['email'] = $email;
+        }
+        if ($_POST['password'] == null) {
+            $_POST['password'] = $password;
+        }
 
         if ($screenshot != null) {
 
@@ -87,25 +102,31 @@
                             'screenshot' => $screenshot
                         )
                     );
-
                     $image = $screenshot;
-
-
-
                 }
-
                 @unlink($_FILES['screenshot']['tmp_name']);
             } else {
                 echo '<p class="error">The screen shot must be a GIF, JPEG, or PNG image file no ' . 'greater than ' . (MAXFILESIZE / 1024) . ' KB in size.</p>';
             }
         }
-        else {
-            //no image has been posted
 
-        }
+        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+        // Write the data to the database
+        $query = "UPDATE users SET email = :email, username = :username WHERE username = :username1";
+        $stmt = $dbh->prepare($query);
+        $result = $stmt->execute(
+            array(
+                'username1' => $username1,
+                'email' => $_POST['email'],
+                'username' => $_POST['username'],
+                //'password' => $_POST['password']
+            )
+        );
+    echo "result -> " . $result;
+    echo "<br> username cookie is -> " . $_COOKIE['logUser'];
+    echo "<br> username1 -> " . $_POST['username'];
 
-
-
+}
 
 
 
@@ -123,32 +144,29 @@
         </div>
         <div id="main">
 
-            Upload or change photo
+            Update user info
             <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                Email <input type="email" name="email" placeholder="<?php echo $email ?>">
+                <br>
+                Username <input type="text" name="username" placeholder="<?php echo $_COOKIE['logUser']?>">
+                <br>
+                Password <input type="password" name="password">
+                <br>
+                Profile Photo
                 <input type="file" id="screenshot" name="screenshot" />
-                <input type="submit" value="Upload Image" name="submit" />
+                <br>
+                <input type="submit" value="Update Profile!" name="submit" />
             </form>
 
         </div>
         <?php
-        //logged in
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
+
+
+
 
     if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
         ?>
