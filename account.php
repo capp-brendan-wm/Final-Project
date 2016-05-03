@@ -20,7 +20,7 @@
 <div id="content">
     <?php
     session_start();
-    //error_reporting(0); // disables all error messages.
+    error_reporting(0); // disables all error messages.
 
     if ($_SESSION['loggedIn'] == "") {
         $_SESSION['loggedIn'] = 0;
@@ -46,115 +46,153 @@
         ));
         $result= $stmt->fetchAll();
 
-        foreach($result as $row) {
-            $username1 = $row['username'];
-            $image = $row['prof_image']; // use this as a profile photo so there's something to upload.
-            $email = $row['email'];
-            $password = $row['password'];
-        }
-        $dbh = null;
-
-
-if ($_POST['username'] != null || $_POST['password'] != null || $_POST['email'] != null || $_POST['screenshot'] != null) {
 
 
 
-        $screenshot = $_FILES['screenshot']['name'];
-        $screenshot_size = $_FILES['screenshot']['size'];
-        $screenshot_type = $_FILES['screenshot']['type'];
-        define('MAXFILESIZE', 10000000);
+        define('MM_UPLOADPATH', 'images/');
+        define('MM_MAXFILESIZE', 10000000);      //  KB
+        define('MM_MAXIMGWIDTH', 1200);        //  pixels
+        define('MM_MAXIMGHEIGHT', 1200);       //  pixels
 
-        if ($_POST['username'] == null) {
-        $_POST['username'] = $username1;
-        }
+        if (isset($_POST['submit'])) {
+            // Grab the profile data from the POST
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $email = trim($_POST['email']);
+            $old_picture = trim($_POST['old_picture']);
+            $new_picture = trim($_FILES['screenshot']['name']);
+            $new_picture_type = $_FILES['screenshot']['type'];
+            $new_picture_size = $_FILES['screenshot']['size'];
+            list($new_picture_width, $new_picture_height) = getimagesize($_FILES['screenshot']['tmp_name']);
+            $error = false;
 
-        if ($_POST['email'] == null) {
-            $_POST['email'] = $email;
-        }
-        if ($_POST['password'] == null) {
-            $_POST['password'] = $password;
-        }
-
-        if ($screenshot != null) {
-
-            if ((($screenshot_type == 'image/gif')
-                || ($screenshot_type == 'image/jpeg')
-                || ($screenshot_type == 'image/pjpeg')
-                || ($screenshot_type == 'image/png')
-                && ($screenshot_size > 0)
-                && ($screenshot_size <= MAXFILESIZE))
-            )
-            {
-
-
-                $target = "images/" . $screenshot;
-                if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $target)) {
-
-                    // Connect to the database
-
-                    $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-                    // Write the data to the database
-                    $query = "UPDATE users SET prof_image = :screenshot WHERE username = :username1";
-                    $stmt = $dbh->prepare($query);
-                    $result = $stmt->execute(
-                        array(
-                            'username1' => $_SESSION['username1'],
-                            'screenshot' => $screenshot
-                        )
-                    );
-                    $image = $screenshot;
+            // Validate and move the uploaded picture file, if necessary
+            if (!empty($new_picture)) {
+                if ((($new_picture_type == 'image/gif') || ($new_picture_type == 'image/jpeg') || ($new_picture_type == 'image/pjpeg') ||
+                        ($new_picture_type == 'image/png')) && ($new_picture_size > 0) && ($new_picture_size <= MM_MAXFILESIZE) &&
+                    ($new_picture_width <= MM_MAXIMGWIDTH) && ($new_picture_height <= MM_MAXIMGHEIGHT)) {
+                    if ($_FILES['file']['error'] == 0) {
+                        // Move the file to the target upload folder
+                        $target = MM_UPLOADPATH . basename($new_picture);
+                        if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $target)) {
+                            // The new picture file move was successful, now make sure any old picture is deleted
+                            if (!empty($old_picture) && ($old_picture != $new_picture)) {
+                                @unlink(MM_UPLOADPATH . $old_picture);
+                            }
+                        }
+                        else {
+                            // The new picture file move failed, so delete the temporary file and set the error flag
+                            @unlink($_FILES['screenshot']['tmp_name']);
+                            $error = true;
+                           // echo '<p class="error">Sorry, there was a problem uploading your picture.</p>';
+                        }
+                    }
                 }
-                @unlink($_FILES['screenshot']['tmp_name']);
-            } else {
-                echo '<p class="error">The screen shot must be a GIF, JPEG, or PNG image file no ' . 'greater than ' . (MAXFILESIZE / 1024) . ' KB in size.</p>';
+                else {
+                    // The new picture file is not valid, so delete the temporary file and set the error flag
+                    @unlink($_FILES['screenshot']['tmp_name']);
+                    $error = true;
+                    echo '<p class="error">Your picture must be a GIF, JPEG, or PNG image file no greater than ' . (MM_MAXFILESIZE / 1024) .
+                        ' KB and ' . MM_MAXIMGWIDTH . 'x' . MM_MAXIMGHEIGHT . ' pixels in size.</p>';
+                }
             }
+
+            // Update the profile data in the database
+            if (!$error) {
+                if (!empty($username) && !empty($password) && !empty($email)) {
+
+                    // Only set the picture column if there is a new picture
+                    if (!empty($new_picture)) {
+
+
+
+
+                        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+
+                        $query = "UPDATE users SET username = :username, email = :email, password = :password, " .
+                            " prof_image = :new_picture WHERE username = :username1";
+                        $stmt = $dbh->prepare($query);
+                        $stmt->execute(array(
+                            'username1' => $_COOKIE['logUser'],
+                            'username' => $username,
+                            'email' => $email,
+                            'password' => $password,
+                            'new_picture' => $new_picture
+                        ));
+                        $_COOKIE['logUser'] = $username;
+                        $_SESSION['image'] = $new_picture;
+                    }
+                    else {
+                        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+
+                        $query = "UPDATE users SET username = :username, email = :email, password = :password, " .
+                            "WHERE username = :username1";
+                        $stmt = $dbh->prepare($query);
+                        $stmt->execute(array(
+                            'username1' => $_COOKIE['logUser'],
+                            'username' => $username,
+                            'email' => $email,
+                            'password' => $password,
+                        ));
+                        $_COOKIE['logUser'] = $username;
+                    }
+
+                    // Confirm success with the user
+                   // echo '<p>Your profile has been successfully updated. Would you like to <a href="viewprofile.php">view your profile</a>?</p>';
+                    //exit();
+                }
+                else {
+                    echo '<p class="error">You must enter all of the profile data (the picture is optional).</p>';
+                }
+            }
+            $_POST['submit'] = null;
+        } // End of check for form submission
+
+        else {
+            // Grab the profile data from the database
+
         }
 
         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-        // Write the data to the database
-        $query = "UPDATE users SET email = :email, username = :username WHERE username = :username1";
+
+        $query = "SELECT prof_image FROM users WHERE username = :username1";
         $stmt = $dbh->prepare($query);
-        $result = $stmt->execute(
-            array(
-                'username1' => $username1,
-                'email' => $_POST['email'],
-                'username' => $_POST['username'],
-                //'password' => $_POST['password']
-            )
-        );
-    echo "result -> " . $result;
-    echo "<br> username cookie is -> " . $_COOKIE['logUser'];
-    echo "<br> username1 -> " . $_POST['username'];
+        $stmt->execute(array(
+            'username1' => $_COOKIE['logUser']
+        ));
+        $result= $stmt->fetchAll();
 
-}
+        foreach ($result as $row) {
+            $_SESSION['image'] = $row['prof_image'];
 
-
-
-
+        }
         ?>
         <div id="top" >
             My Account <a href="account.php?logout=true"> Logout</a>
         </div>
         <div id="account">
-            <img src="images/<?php echo $image; ?>" id="image">
+            <img src="images/<?php echo $_SESSION['image']; ?>" id="image">
 
             <div id="nofloat" >
-                <div id="account2"> <?php echo $_SESSION['username1'];?> </div>
+                <div id="account2"><h1> <?php echo $_COOKIE['logUser'];?></h1> </div>
             </div>
         </div>
         <div id="main">
 
             Update user info
             <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-                Email <input type="email" name="email" placeholder="<?php echo $email ?>">
+
+                <input type="hidden" name="old_picture" value="<?php if (!empty($old_picture)) echo $old_picture; ?>" />
+
+                Email <input type="email" name="email" placeholder="email">
                 <br>
-                Username <input type="text" name="username" placeholder="<?php echo $_COOKIE['logUser']?>">
+                Username <input type="text" name="username" placeholder="username">
                 <br>
-                Password <input type="password" name="password">
+                Password <input type="password" name="password" placeholder="password">
                 <br>
                 Profile Photo
-                <input type="file" id="screenshot" name="screenshot" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                <input type="file" id="screenshot" name="screenshot"/>
                 <br>
                 <input type="submit" value="Update Profile!" name="submit" />
             </form>
