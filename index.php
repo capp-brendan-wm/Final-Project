@@ -66,6 +66,7 @@ error_reporting(0); // disables all error messages.
 <!--# # # # # # # # # # -->
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
+<img style="width: 79.2%; height: 350px; margin-left: 9.8%; margin-right: 10%; position: absolute; z-index: 10;" src="images/slideshow%20bg.png">
 <div id="content">
     <!-- Start cssSlider -->
     <div class='csslider1 autoplay '>
@@ -117,6 +118,7 @@ error_reporting(0); // disables all error messages.
         </div>
     </div>
     <!-- End cssSlider -->
+    <img style="width: 50%;" src="images/crown1.jpg">
     <img style="width: 50%; float: Left" src="images/crown1.jpg">
 
 </div>
