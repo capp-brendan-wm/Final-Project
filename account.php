@@ -20,7 +20,7 @@
 <div id="content">
     <?php
     session_start();
-    //error_reporting(0); // disables all error messages.
+    error_reporting(0); // disables all error messages.
 
     if ($_SESSION['loggedIn'] == "") {
         $_SESSION['loggedIn'] = 0;
