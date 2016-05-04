@@ -66,6 +66,7 @@ error_reporting(0); // disables all error messages.
 <!--# # # # # # # # # # -->
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
+<img style="width: 79.2%; height: 350px; margin-left: 9.8%; margin-right: 10%; position: absolute; z-index: 10;" src="images/slideshow%20bg.png">
 <div id="content">
     <!-- Start cssSlider -->
     <div class='csslider1 autoplay '>
@@ -79,13 +80,13 @@ error_reporting(0); // disables all error messages.
                 <img src="https://newevolutiondesigns.com/images/freebies/city-wallpaper-5.jpg" style="width: 100%;">
             </div>
             <li class='num0 img'>
-                <a href="http://cssslider.com" target=""><img src='http://home.bt.com/images/queen-elizabeth-ii-coronation-crown-137477997009502601-130726102131.jpg' alt='slide1' title='slide1' /> </a>
+                <a href="" target=""><img src='http://home.bt.com/images/queen-elizabeth-ii-coronation-crown-137477997009502601-130726102131.jpg' alt='slide1' title='slide1' /> </a>
             </li>
             <li class='num1 img'>
-                <a href="http://cssslider.com" target=""><img src='http://static1.squarespace.com/static/561f9bcae4b0f197c395011c/t/561fcf31e4b0ad1f9959cf43/1444925234702/diytailoring.jpg?format=1500w' alt='slide2' title='slide2' /> </a>
+                <a href="about.php" target=""><img src='http://static1.squarespace.com/static/561f9bcae4b0f197c395011c/t/561fcf31e4b0ad1f9959cf43/1444925234702/diytailoring.jpg?format=1500w' alt='slide2' title='slide2' /> </a>
             </li>
             <li class='num2 img'>
-                <a href="http://cssslider.com" target=""><img src='http://edc.h-cdn.co/assets/cm/15/04/54c19810eab0d_-_zoey-deschanel-tommy-fashion-line-95399786.jpg' alt='slide3' title='slide3' /> </a>
+                <a href="testform.php" target=""><img src='http://edc.h-cdn.co/assets/cm/15/04/54c19810eab0d_-_zoey-deschanel-tommy-fashion-line-95399786.jpg' alt='slide3' title='slide3' /> </a>
             </li>
 
         </ul>
@@ -117,6 +118,7 @@ error_reporting(0); // disables all error messages.
         </div>
     </div>
     <!-- End cssSlider -->
+    <img style="width: 50%;" src="images/crown1.jpg">
     <img style="width: 50%; float: Left" src="images/crown1.jpg">
 
 </div>
