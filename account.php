@@ -144,7 +144,7 @@
                 }
             }
             $_POST['submit'] = null;
-            header('location: account.php?fixit=true');
+           // header('location: account.php?fixit=true');
         } // End of check for form submission
 
         else {
