@@ -86,6 +86,7 @@
     // Update the profile data in the database
     if (!$error) {
       if (!empty($first_name) && !empty($last_name) && !empty($gender) && !empty($birthdate) && !empty($city) && !empty($state)) {
+          echo "it makes it here.";
         // Only set the picture column if there is a new picture
         if (!empty($new_picture)) {
          // $query = "UPDATE mismatch_user SET first_name = '$first_name', last_name = '$last_name', gender = '$gender', " .
@@ -106,6 +107,8 @@
                 ));
         }
         else {
+
+
 //          $query = "UPDATE mismatch_user SET first_name = '$first_name', last_name = '$last_name', gender = '$gender', " .
   //          " birthdate = '$birthdate', city = '$city', state = '$state' WHERE user_id = '" . $_SESSION['user_id'] . "'";
             $query =  "UPDATE mismatch_user SET first_name = :firstname, last_name = :lastname, gender = :gender, " .

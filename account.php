@@ -20,18 +20,14 @@
 <div id="content">
     <?php
     session_start();
-    error_reporting(0); // disables all error messages.
+    //error_reporting(0); // disables all error messages.
 
     if ($_SESSION['loggedIn'] == "") {
         $_SESSION['loggedIn'] = 0;
     }
     if ($_GET['logout'] == "true") {
         $_SESSION['loggedIn'] = 0;
-        header("Location: account.php");
     }
-
-
-
 
 
 
@@ -97,6 +93,7 @@
                 }
             }
 
+
             // Update the profile data in the database
             if (!$error) {
                 if (!empty($username) && !empty($password) && !empty($email)) {
@@ -123,9 +120,10 @@
                         $_SESSION['image'] = $new_picture;
                     }
                     else {
+                        echo "it makes it here.";
                         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-                        $query = "UPDATE users SET username = :username, email = :email, password = :password, " .
+                        $query = "UPDATE users SET username = :username, email = :email, password = :password " .
                             "WHERE username = :username1";
                         $stmt = $dbh->prepare($query);
                         $stmt->execute(array(
@@ -146,6 +144,7 @@
                 }
             }
             $_POST['submit'] = null;
+            header('location: account.php?fixit=true');
         } // End of check for form submission
 
         else {
