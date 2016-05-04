@@ -67,7 +67,28 @@ error_reporting(0); // disables all error messages.
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
 <div id="content">
-    <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/a1/99/c6/a199c69ed7f6b52943df06c06d092e29.jpg">
+    <?php
+    if($_COOKIE['logUser'] != null){
+        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
+
+        $query = "SELECT * FROM users WHERE username = :username1";
+        $stmt = $dbh->prepare($query);
+        $stmt->execute(array(
+            'username1' => $_SESSION['username1']
+        ));
+        $result= $stmt->fetchAll();
+        ?>
+        <ul>
+            <h1><?php echo $_COOKIE['logUser']; ?>, Welcome to our Crowned Clothing Personality Quiz!</h1>
+        </ul>
+        <?php
+    }else{
+        ?>
+        <h1>You have found our Crowned Clothing Personality Quiz</h1>
+        <h2>We've noticed you are not logged-in, to access the quiz and save your results, please <a href="account.php">Sign In</a> </h2>
+        <?php
+    }
+    ?>
 </div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->

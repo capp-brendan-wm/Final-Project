@@ -67,7 +67,8 @@ error_reporting(0); // disables all error messages.
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
 <div id="content">
-    <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/a1/99/c6/a199c69ed7f6b52943df06c06d092e29.jpg">
+    <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/1a/7b/3e/1a7b3ec54bc6fa125d0bcb8f3b1adfd9.jpg">
+    <p>Welcome to Crown Tailors where we can help you find your style personality. Are you always stuck wondering about what to wear to show off your personality? Well look no further here at Crown Tailors we'll help you discover ways to show off your personality through a simple and short personality clothes that'll match you to your style.</p>
 </div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
