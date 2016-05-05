@@ -118,14 +118,33 @@ error_reporting(0); // disables all error messages.
         </div>
     </div>
     <!-- End cssSlider -->
-    <img style="width: 50%;" src="images/crown1.jpg">
-    <img style="width: 50%; float: Left" src="images/crown1.jpg">
+    <img style="width: 50%; float: right" src="images/crown1.jpg">
+    <div style="width: 50%;"><br><h1>HEY YOU!</h1><h2>Do you want clothes tailored to you and your personality perfectly?</h2><h3>Take our <a href="testform.php">Crowned Clothing Personality Quiz</a>!</h3><img style="width: 25%;" src="http://www.picgifs.com/graphics/c/clothing/graphics-clothing-929591.gif"></div>
 </div>
-
-    <div id="sale">
-
-    </div>
-
+<div style="text-align: center" class="productLine">
+    <ul>
+        <li>
+            <div class="open">
+                <img style="width: 70%" src="">
+                <h2>Socs</h2>
+            </div></li>
+        <li>
+            <div class="open">
+                <img style="width: 70%" src="">
+                <h2>Irises</h2>
+            </div></li>
+        <li><div class="open">
+                <img style="width: 70%" src="">
+                <h2>Flyers</h2>
+            </div></li>
+        <li>
+            <div class="open">
+                <img style="width: 70%" src="">
+                <h2>Cazzies</h2>
+            </div>
+        </li>
+    </ul>
+</div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
 <!--#   FOOTER DIV    #-->

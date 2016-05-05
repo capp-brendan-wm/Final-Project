@@ -122,6 +122,46 @@ header{
     height: 100%
 }
 
+/*productLine start*/
+.productLine{
+    width: 100%;
+    font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    font-size: 13px;
+}
+.productLine ul{
+    margin-left: 2%;
+    margin-right: 2%;
+    list-style-type: none;
+    overflow: hidden;
+}
+.productLine li{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.open{
+    text-align: center;
+    background-color: #ffda5f;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    float: left;
+    width: 20%;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #000000;
+}
+.productLine li img{
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    float: top;
+    height: 95px;
+    width: 96%;
+}
+/*productLine end*/
 /**************//**************//**************/
 /**************//**  FOOTER  **//**************/
 /**************//**************//**************/
