@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0); // disables all error messages.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,58 +85,43 @@ error_reporting(0); // disables all error messages.
         <!--##############################################################################################################-->
 
         <?php
-        require_once('appvars.php');
-// Make sure the user is logged in before going any further.
-        if (!isset($_SESSION['user_id'])) {
-            echo '<p class="login">Please <a href="login.php">log in</a> to access this page.</p>';
-            exit();
-        }
-
-// Connect to the database
-//$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        $dbh = new PDO('mysql:host=localhost;dbname=mismatchdb', 'root', 'root');
-
-// If this user has never answered the questionnaire, insert empty responses into the database
-//$query = "SELECT * FROM mismatch_response WHERE user_id = '" . $_SESSION['user_id'] . "'";
-//$data = mysqli_query($dbc, $query);
-
-
-
-        $query = "SELECT * FROM mismatch_response WHERE user_id = :user_id";
-        $stmt = $dbh->prepare($query);
-        $stmt->execute(array(
-            'user_id' => $_SESSION['user_id']
-        ));
-        $data = $stmt->fetchAll();
-
-
-        if (count($data) == 0) {
-            // First grab the list of topic IDs from the topic table
-            //$query = "SELECT topic_id FROM mismatch_topic ORDER BY category_id, topic_id";
-            //$data = mysqli_query($dbc, $query);
-            $topicIDs = array();
-
-            $query = "SELECT topic_id FROM mismatch_topic ORDER BY category_id, topic_id";
+        foreach($result as $row){
+            $thyID = $row['user_id'];
+            $query = "SELECT * FROM ct_response WHERE users_user_id = :users_user_id";
             $stmt = $dbh->prepare($query);
-            $stmt->execute();
-            $data = $stmt->fetchAll();
+            $stmt->execute(array(
+                'users_user_id' => $thyID
+            ));
+            $data= $stmt->fetchAll();
 
-            foreach ($data as $row) {
-                array_push($topicIDs, $row['topic_id']);
+            require_once('appvars.php');
+
+            if (count($data) == 0) {
+                $topicIDs = array();
+
+                $query2 = "SELECT topic_id FROM ct_topic ORDER BY category, ct_type_type_id";
+                $stmt2 = $dbh->prepare($query2);
+                $stmt2->execute();
+                $data2 = $stmt->fetchAll();
+
+                foreach ($data2 as $row2) {
+                    array_push($topicIDs, $row2['topic_id']);
+                }
+
+                // Insert empty response rows into the response table, one per topic
+                foreach ($topicIDs as $topic_id) {
+                    //$query = "INSERT INTO mismatch_response (user_id, topic_id) VALUES ('" . $_SESSION['user_id']. "', '$topic_id')";
+                    //mysqli_query($dbc, $query);
+
+                    $query = "INSERT INTO ct_response (users_user_id, topic_id) VALUES (:users_user_id, :topic_id)";
+                    $stmt = $dbh->prepare($query);
+                    $stmt->execute(array(
+                        'users_user_id' => $thyID,
+                        'topic_id' => $topic_id
+                    ));
+                }
             }
 
-            // Insert empty response rows into the response table, one per topic
-            foreach ($topicIDs as $topic_id) {
-                //$query = "INSERT INTO mismatch_response (user_id, topic_id) VALUES ('" . $_SESSION['user_id']. "', '$topic_id')";
-                //mysqli_query($dbc, $query);
-
-                $query = "INSERT INTO mismatch_response (user_id, topic_id) VALUES (:user_id, :topic_id)";
-                $stmt = $dbh->prepare($query);
-                $stmt->execute(array(
-                    'user_id' => $_SESSION['user_id'],
-                    'topic_id' => $topic_id
-                ));
-            }
         }
 
 // If the questionnaire form has been submitted, write the form responses to the database
@@ -147,7 +131,7 @@ error_reporting(0); // disables all error messages.
                 //$query = "UPDATE mismatch_response SET response = '$response' WHERE response_id = '$response_id'";
                 //mysqli_query($dbc, $query);
 
-                $query = "UPDATE mismatch_response SET response = :response WHERE response_id = :response_id";
+                $query = "UPDATE ct_response SET response = :response WHERE response_id = :response_id";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(
                     'response' => $response,
@@ -189,7 +173,7 @@ error_reporting(0); // disables all error messages.
 
 // Generate the questionnaire form by looping through the response array
         echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
-        echo '<p>How do you feel about each topic?</p>';
+        echo '<p>Please Answer the Following Questions</p>';
         $category = $responses[0]['category_name'];
         echo '<fieldset><legend>' . $responses[0]['category_name'] . '</legend>';
         foreach ($responses as $response) {

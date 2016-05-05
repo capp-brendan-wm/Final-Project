@@ -3,7 +3,7 @@ session_start();
 error_reporting(0); // disables all error messages.
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Crowned Tailor - Index</title>
     <link rel="icon" href="images/CT-icon.png">
