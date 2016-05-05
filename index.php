@@ -120,8 +120,12 @@ error_reporting(0); // disables all error messages.
     <!-- End cssSlider -->
     <img style="width: 50%;" src="images/crown1.jpg">
     <img style="width: 50%; float: Left" src="images/crown1.jpg">
-
 </div>
+
+    <div id="sale">
+
+    </div>
+
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
 <!--#   FOOTER DIV    #-->
