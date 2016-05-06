@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +82,7 @@ if ($_POST['submit'] == null) {
 
 
     echo "<form method='post'><table>";
+    $i = 1;
             foreach ($result as $row) {
             echo "<tr> <td>" .
                     $row['question'] . "<br>" .
@@ -100,12 +102,13 @@ if ($_POST['submit'] == null) {
                 $result2= $stmt2->fetchAll();
 
                 echo "<td>";
+
                     foreach ($result2 as $row2) {
 
-                    echo "<input type='checkbox' value='1' name='" . $row2['ct_type_type_id'] . "'>";
+                    echo "<input type='checkbox' value='0' name='".  $i . $row2['ct_type_type_id'] . "'>";
                     echo $row2['topic'] . "<br>";
-
                     }
+                    $i++;
                     echo "</td>";
 
 
@@ -120,7 +123,66 @@ if ($_POST['submit'] == null) {
 
 }
 else {
-    echo "you took the test";
+
+
+
+
+
+    $socs = 0;
+    $irises = 0;
+    $flyers = 0;
+    $cazzies = 0;
+    while ($i < 17) {
+        if (is_numeric($_POST[$i . "1"])) {
+             $socs++;
+        }if (is_numeric($_POST[$i . "2"])) {
+            $irises++;
+        }if (is_numeric($_POST[$i . "3"])) {
+            $flyers++;
+        }if (is_numeric($_POST[$i . "4"])) {
+            $cazzies++;
+        }
+        $i ++;
+    }
+
+
+    $array = array(0 => $socs, 1 => $irises, 2 => $flyers, 3 => $cazzies);
+    //echo $socs . "<br>" . $irises . "<br>" . $flyers . "<br>" . $cazzies . "<br>";
+
+    $testResult = max($array);
+    //echo "testResult -> " . $testResult . "<- <br>";
+    $_SESSION['testResult'] = array_search($testResult, $array);
+    //echo "sesisonResult -> " .  $_SESSION['testResult'] . "<-";
+
+    if ($_SESSION['testResult'] == 0) {
+        $_SESSION['testResult'] = "Socs";
+    } if ($_SESSION['testResult'] == 1) {
+        $_SESSION['testResult'] = "Irises";
+    } if ($_SESSION['testResult'] == 2) {
+        $_SESSION['testResult'] = "Flyers";
+    } if ($_SESSION['testResult'] == 3) {
+        $_SESSION['testResult'] = "Cazzies";
+    }
+
+    if ($_COOKIE['logUser'] != null) {
+        if ($socs == $irises && $irises == $flyers && $flyers == $cazzies) {
+
+            $_POST['submit'] = null;
+            header("location: testform.php");
+
+        }
+    echo "<h1> You are part of the " . $_SESSION['testResult'] . "!! </h1>";
+
+
+    // display some examples of clothing that a $_SESSION['testResult'] would wear.
+
+
+
+
+    }
+    else {
+        echo "<h1> You must be <a href='account.php'> logged in</a> to view your results";
+    }
 
 
 
