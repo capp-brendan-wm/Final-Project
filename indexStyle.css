@@ -4,7 +4,7 @@
 /**************//**  GENERAL **//**************/
 /**************//**************//**************/
 #body{
-    background-color: #e9e9e9;
+    background-color: #d2d2d2;
 }
 /**************//**************//**************/
 /**************//**  HEADER  **//**************/
@@ -207,7 +207,7 @@ footer{
     display: inline-block;
     position: relative;
     z-index: 20;
-    width: 70%;
+    width: 100%;
 }
 .csslider1 > .cs_anchor {
     display: none;
