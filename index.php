@@ -117,29 +117,33 @@ error_reporting(0); // disables all error messages.
         </div>
     </div>
     <!-- End cssSlider -->
-    <img style="width: 50%; float: right" src="images/crown1.jpg">
-    <div style="width: 50%;"><br><h1>HEY YOU!</h1><h2>Do you want clothes tailored to you and your personality perfectly?</h2><h3>Take our <a href="testform.php">Crowned Clothing Personality Quiz</a>!</h3><img style="width: 25%;" src="http://www.picgifs.com/graphics/c/clothing/graphics-clothing-929591.gif"></div>
+    <h1 style="font-size: 40px;">Welcome to the Domain of the Crowned Tailor</h1>
+
+    <div>
+        <img style="width: 50%; float: right" src="images/crown1.jpg">
+        <div style="width: 50%;"><br><h1>HEY YOU!</h1><h2>Do you want clothes tailored to you and your personality perfectly?</h2><h3>Take our <a href="testform.php">Crowned Clothing Personality Quiz</a>!</h3><img style="width: 25%;" src="http://www.picgifs.com/graphics/c/clothing/graphics-clothing-929591.gif"></div>
+    </div>
 </div>
 <div style="text-align: center" class="productLine">
-    <h2>CHECK OUT OUR PERSONALITY PRODUCT LINES!</h2>
+    <h2 style="margin-left: 10%; margin-top: 15%; margin-right: 10%; font-size: 30px;">CHECK OUT OUR PERSONALITY PRODUCT LINES!</h2>
     <ul>
         <li>
             <div class="open">
-                <img style="width: 70%" src="https://openclipart.org/image/2400px/svg_to_png/231633/Colorful-Circle-Fractal.png">
+                <img style="width: 50%; height: 100px" src="http://cdn.shopify.com/s/files/1/0035/1192/products/black_varsity_jacket_unis_open_1024x1024.jpg?v=1445460266">
                 <h2>Socs</h2>
             </div></li>
         <li>
             <div class="open">
-                <img style="width: 70%; -webkit-filter: invert(100%); filter: invert(100%);" src="https://s-media-cache-ak0.pinimg.com/236x/46/9c/ff/469cff779f3cb8c293d551fd775794ca.jpg">
+                <img style="width: 70%; height: 100px" src="http://www.freevector.com/uploads/vector/preview/243/FreeVector-Beautiful-Eye.jpg">
                 <h2>Irises</h2>
             </div></li>
         <li><div class="open">
-                <img style="width: 70%" src="https://s-media-cache-ak0.pinimg.com/600x315/e8/b0/1a/e8b01ac568097fbb5988d15203a4bded.jpg">
+                <img style="width: 60%; height: 100px" src="https://s-media-cache-ak0.pinimg.com/736x/c7/48/c9/c748c9cffbd463256afd60c98b48fa53.jpg">
                 <h2>Flyers</h2>
             </div></li>
         <li>
             <div class="open">
-                <img style="width: 70%" src="https://www.colourbox.com/preview/3217520-isolated-fluffy-heart-on-white-background.jpg">
+                <img style="width: 50%; height: 100px" src="https://www.colourbox.com/preview/3217520-isolated-fluffy-heart-on-white-background.jpg">
                 <h2>Cazzies</h2>
             </div>
         </li>
