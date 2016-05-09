@@ -39,7 +39,7 @@ error_reporting(0); // disables all error messages.
                 ?>
                 <ul>
                     <li><a href="logout.php">Log-Out</a></li>
-                    <li><a href="account.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
+                    <li><a href="upload.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
                     <li><a href="admin.php"><?php echo $_COOKIE['logUser']?></a></li>
                 </ul>
                 <?php

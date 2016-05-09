@@ -39,7 +39,7 @@ error_reporting(0); // disables all error messages.
                 ?>
                 <ul>
                     <li><a href="logout.php">Log-Out</a></li>
-                    <li><a href="account.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
+                    <li><a href="upload.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
                     <li><a href="admin.php"><?php echo $_COOKIE['logUser']?></a></li>
                 </ul>
                 <?php
@@ -67,8 +67,13 @@ error_reporting(0); // disables all error messages.
 <!--#   CONTENT DIV   #-->
 <!--# # # # # # # # # # -->
 <div id="content">
+    <h1 style="font-size: 22px">Among the best, We out-do the rest</h1>
+    <h1 style="font-size: 30px">Dress like Royalty</h1>
+    <h1 style="font-size: 35px">For those who rule, Rule Well</h1>
+    <h1 style="font-size: 55px; ">Long Live The Crowned</h1>
     <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/1a/7b/3e/1a7b3ec54bc6fa125d0bcb8f3b1adfd9.jpg">
     <p>Welcome to Crown Tailors where we can help you find your style personality. Are you always stuck wondering about what to wear to show off your personality? Well look no further here at Crown Tailors we'll help you discover ways to show off your personality through a simple and short personality clothes that'll match you to your style.</p>
+    <p>Crown Tailor was founded by Andy, Zach, Brendan and Keyan in May of 2016. Originally located within the START @ West-MEC building in the Grand Canyon State of Arizona, this Glendale Office Building/School. Crowned Tailor shared its home with about 5 other businesses, most of them also being start-ups.</p>
 </div>
 <!--***  content end  ***-->
 <!--# # # # # # # # # #-->
