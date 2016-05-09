@@ -40,7 +40,7 @@ error_reporting(0);
                 <ul>
                     <li><a href="logout.php">Log-Out</a></li>
                     <li><a href="upload.php"><img src="images/<?php echo $image; ?>" id="image"></a></li>
-                    <li><a href="admin.php"><?php echo $_COOKIE['logUser']?></a></li>
+                    <li><a href="account.php"><?php echo $_COOKIE['logUser']?></a></li>
                 </ul>
                 <?php
             }else{
@@ -209,6 +209,7 @@ else {
     </div>
     <div id="lowLinks">
         <a href="index.php">Home</a>
+        <a href="admin.php">Mng Website</a>
         <a href="account.php">Sign-In</a>
         <a href="about.php">About Us</a>
         <img src="images/CT-Logo2.png">
