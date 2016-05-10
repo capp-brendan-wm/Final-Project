@@ -89,15 +89,15 @@ if ($_POST['submit'] == null) {
                     "  </td>";
 
 
-                if ($row['ct_type_type_id'] > 0) {
+                if ($row['question_id'] > 0) {
 
 
                 $dbh2 = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-                $query2 = "SELECT * FROM ct_topic WHERE ct_questions_question_id = :ct_questions_question_id";
+                $query2 = "SELECT * FROM ct_topic WHERE ct_questions_question_id = :ct_questions_question_id ORDER BY ct_type_type_id";
                 $stmt2 = $dbh2->prepare($query2);
                 $stmt2->execute(array(
-                'ct_questions_question_id' => $row['ct_type_type_id']
+                'ct_questions_question_id' => $row['question_id']
                 ));
                 $result2= $stmt2->fetchAll();
 
