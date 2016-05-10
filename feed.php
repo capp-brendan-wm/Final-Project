@@ -64,22 +64,24 @@ error_reporting(0); // disables all error messages.
 </header>
 <!--***  header end  ***-->
 <!--# # # # # # # # # # -->
+<div id="content">
 <?php
 define('GW_UPLOADPATH', 'images/');
 // Connect to the database
 $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 // Retrieve the score data from MySQL
-$query = "SELECT * FROM ct_uploads";
+$query = "SELECT * FROM ct_uploads ORDER BY id_ct_submitions DESC";
 $stmt = $dbh->prepare($query);
 $stmt->execute();
 $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
 foreach($score as $row) {
-    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td>";
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "'></td>";
 }
 echo '</table>';
 ?>
+    </div>
 <!--# # # # # # # # # #-->
 <!--#   FOOTER DIV    #-->
 <!--# # # # # # # # # #-->

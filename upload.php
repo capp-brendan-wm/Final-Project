@@ -143,7 +143,8 @@ error_reporting(0); // disables all error messages.
     }
     $_POST['submit'] = null;
     // header('location: account.php?fixit=true');
-        echo "<h1> Your Clothing has been successfully uploaded! </h1>";
+        echo "<h1> Your Clothing has been successfully uploaded! </h1>
+  <a href=\"feed.php\"> See what others' posted </a>";
     } // End of check for form submission
 
     else {
@@ -173,6 +174,8 @@ error_reporting(0); // disables all error messages.
 
         </div>
         <br>
+        <br>
+        <a href="feed.php"> See what others' posted </a>
         <?php
 
     }
@@ -182,6 +185,7 @@ error_reporting(0); // disables all error messages.
 }
 else {
     echo "<h1> You must be logged in to upload images </h1>";
+    echo "  <a href=\"feed.php\"> See what others' posted </a>";
 }
 ?>
 
