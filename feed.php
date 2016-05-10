@@ -67,32 +67,16 @@ error_reporting(0); // disables all error messages.
 <?php
 define('GW_UPLOADPATH', 'images/');
 // Connect to the database
-$dbh = new PDO('mysql:host=localhost;dbname=gwdb', 'root', 'root');
+$dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 // Retrieve the score data from MySQL
-$query = "SELECT * FROM guitarwars ORDER BY score DESC";
+$query = "SELECT * FROM ct_uploads";
 $stmt = $dbh->prepare($query);
 $stmt->execute();
 $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
-$i = 0;
 foreach($score as $row) {
-    $filepath = GW_UPLOADPATH . $row['screenshot'];
-    // Display the score data
-    if ($i == 0) {
-        echo '<tr><td colspan="2" class="topscoreheader">Top Score: ' . $row['score'] . '</td></tr>';
-    }
-    echo '<tr><td class="scoreinfo">';
-    echo '<span class="score">' . $row['score'] . '</span><br />';
-    echo '<strong>Name:</strong> ' . $row['name'] . '<br />';
-    echo '<strong>Date:</strong> ' . $row['date'] . '</td></tr>';
-    if(is_file($filepath) && filesize($filepath) > 0) {
-        echo '<td><img src="' .$filepath. '"alt="Score image" /></td></tr>';
-    }
-    else {
-        echo '<td><img src="unverified.gif" alt="Unverified score" /></td></tr>';
-    }
-    $i++;
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td>";
 }
 echo '</table>';
 ?>
