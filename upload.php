@@ -130,11 +130,12 @@ error_reporting(0); // disables all error messages.
 
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-    $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1)";
+    $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category)";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
     'username1' => $_COOKIE['logUser'],
-    'screenshot' => $new_picture
+    'screenshot' => $new_picture,
+        'category' => $_POST['category']
     ));
     // Confirm success with the user
     // echo '<p>Your profile has been successfully updated. Would you like to <a href="viewprofile.php">view your profile</a>?</p>';
@@ -142,7 +143,8 @@ error_reporting(0); // disables all error messages.
     }
     $_POST['submit'] = null;
     // header('location: account.php?fixit=true');
-        echo "<h1> Your Clothing has been successfully uploaded! </h1>";
+        echo "<h1> Your Clothing has been successfully uploaded! </h1>
+  <a href=\"feed.php\"> See what others' posted </a>";
     } // End of check for form submission
 
     else {
@@ -159,11 +161,21 @@ error_reporting(0); // disables all error messages.
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                 <input type="file" id="screenshot" name="screenshot"/>
                 <br>
+                <select name="category">
+                    <option value=""></option>
+                    <option value="socs">Socs </option>
+                    <option value="irises"> Irises </option>
+                    <option value="flyers"> Flyers </option>
+                    <option value="cazzies"> Cazzies </option>
+                </select>
+                <br>
                 <input type="submit" value="Share these clothes!" name="submit" />
             </form>
 
         </div>
         <br>
+        <br>
+        <a href="feed.php"> See what others' posted </a>
         <?php
 
     }
@@ -173,6 +185,7 @@ error_reporting(0); // disables all error messages.
 }
 else {
     echo "<h1> You must be logged in to upload images </h1>";
+    echo "  <a href=\"feed.php\"> See what others' posted </a>";
 }
 ?>
 
