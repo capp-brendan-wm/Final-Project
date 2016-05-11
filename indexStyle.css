@@ -1395,3 +1395,7 @@ only screen and (                max-resolution: 2dppx)  and (max-width: 480px) 
         display: none;
     }
 }
+.image {
+    width: 200px;
+    height: 200px;
+}

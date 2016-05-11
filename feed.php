@@ -65,6 +65,7 @@ error_reporting(0); // disables all error messages.
 <!--***  header end  ***-->
 <!--# # # # # # # # # # -->
 <div id="content">
+
 <?php
 define('GW_UPLOADPATH', 'images/');
 // Connect to the database
@@ -77,10 +78,11 @@ $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
 foreach($score as $row) {
-    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "'></td>";
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "' class='image'></td>";
 }
 echo '</table>';
 ?>
+
     </div>
 <!--# # # # # # # # # #-->
 <!--#   FOOTER DIV    #-->
