@@ -7,7 +7,7 @@ error_reporting(0); // disables all error messages.
 <head>
     <title>Crowned Tailor - Index</title>
     <link rel="icon" href="images/CT-icon.png">
-    <link rel="stylesheet" type="text/css" href="indexStyle.css">
+    <link rel="stylesheet" type="text/css" href="primaryStyle.css">
 </head>
 <body>
 <!--###  body start  ###-->

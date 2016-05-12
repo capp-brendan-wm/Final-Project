@@ -155,3 +155,7 @@ footer{
     border-style: solid;
     background-color: lightgray;
 }
+.imageHolder {
+    width: 200px;
+    height: 200px;
+}
