@@ -55,11 +55,33 @@ error_reporting(0); // disables all error messages.
     </div>
     <br><br><br>
     <div id="navbar">
-        <ul>
-            <li><a href="testform.php">Quiz</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="index.php">Home</a></li>
-        </ul>
+        <?php
+        if($_COOKIE['logUser'] != null){
+            $query = "SELECT * FROM users WHERE username = :username1";
+            $stmt = $dbh->prepare($query);
+            $stmt->execute(array(
+                'username1' => $_SESSION['username1']
+            ));
+            $result= $stmt->fetchAll();
+
+            ?>
+            <ul>
+                <li><a href="feed.php">TheFeed</a></li>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }else{
+            ?>
+            <ul>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }
+        ?>
     </div>
 </header>
 <!--***  header end  ***-->
