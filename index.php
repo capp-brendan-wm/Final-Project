@@ -181,9 +181,10 @@ error_reporting(0); // disables all error messages.
     </div>
     <div id="lowLinks">
         <a href="index.php">Home</a>
-        <a href="admin.php">Mng Website</a>
         <a href="account.php">Sign-In</a>
         <a href="about.php">About Us</a>
+        <a href="upload.php">Sponsor Page</a>
+        <a href="admin.php">Admin</a>
         <img src="images/CT-Logo2.png">
     </div>
 </footer>
