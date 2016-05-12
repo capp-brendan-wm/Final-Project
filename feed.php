@@ -100,7 +100,7 @@ $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
 foreach($score as $row) {
-    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "' class='image'></td>";
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td class='imageHolder'><img src='images/" . $row['image'] . "'></td> </tr>";
 }
 echo '</table>';
 ?>
