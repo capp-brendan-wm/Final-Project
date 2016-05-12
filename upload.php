@@ -133,8 +133,8 @@ error_reporting(0); // disables all error messages.
     $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category)";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
-    'username1' => $_COOKIE['logUser'],
-    'screenshot' => $new_picture,
+        'username1' => $_COOKIE['logUser'],
+        'screenshot' => $new_picture,
         'category' => $_POST['category']
     ));
     // Confirm success with the user

@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 error_reporting(0); // disables all error messages.
@@ -5,11 +6,22 @@ error_reporting(0); // disables all error messages.
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <script src="jquery.js"></script>
+
     <title>Crowned Tailor - Index</title>
     <link rel="icon" href="images/CT-icon.png">
-    <link rel="stylesheet" type="text/css" href="indexStyle.css">
+    <link rel="stylesheet" type="text/css" href="primaryStyle.css">
 </head>
 <body>
+<script>
+    (function () {
+        $('button').click(function () {
+            $('span').html(function (i, val) {
+                return val * 1 + 1;
+            });
+        });
+    }.call(this));
+</script>
 <!--###  body start  ###-->
 <!--# # # # # # # # # #-->
 <!--#   HEADER DIV    #-->
@@ -77,7 +89,14 @@ $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
 foreach($score as $row) {
-    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "'></td>";
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "'></td>
+    <td>
+        <button type='button'>
+            <i class='fa fa-thumbs-up'></i>
+            Like
+            <span>0</span>
+        </button>
+    </td>";
 }
 echo '</table>';
 ?>
