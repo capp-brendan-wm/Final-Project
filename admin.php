@@ -130,19 +130,15 @@ $result = $stmt->fetchAll();
 foreach ($result as $row) {
 
 
-        $confirm = $row['user_id'];
-
-
-
     echo " <tr>
     <td class='admintable'>Account id: " . $row['user_id'] . " </td>
     <td class='admintable'>Account Email " . $row['email'] . " </td>
     <td class='admintable'>Account Username: " . $row['username'] . " </td>
     <td class='admintable'>Account Password: " . $row['password'] . " </td>
-    <td class='admintable'><a href='admin.php?remove=". $row['user_id'] . "'>Remove user</a></td>";
+    <td class='admintable'><a href='admin.php?remove=". $row['id'] . "'>Remove user</a></td>";
 
-       if ($_GET['remove'] == $row['user_id']) {
-           $_SESSION['user_id'] = $row['user_id'];
+       if ($_GET['remove'] == $row['id']) {
+           $_SESSION['id'] = $row['id'];
            echo "<td class='admintable'>Confirm? <a href='admin.php?confirm=yes'>Yes </a><a href='admin.php?confirm=no'> No</a> </td>";
        }
     echo "</tr>";
