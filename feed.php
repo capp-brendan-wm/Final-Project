@@ -67,16 +67,39 @@ error_reporting(0); // disables all error messages.
     </div>
     <br><br><br>
     <div id="navbar">
-        <ul>
-            <li><a href="testform.php">Quiz</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="index.php">Home</a></li>
-        </ul>
+        <?php
+        if($_COOKIE['logUser'] != null){
+            $query = "SELECT * FROM users WHERE username = :username1";
+            $stmt = $dbh->prepare($query);
+            $stmt->execute(array(
+                'username1' => $_SESSION['username1']
+            ));
+            $result= $stmt->fetchAll();
+
+            ?>
+            <ul>
+                <li><a href="feed.php">TheFeed</a></li>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }else{
+            ?>
+            <ul>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }
+        ?>
     </div>
 </header>
 <!--***  header end  ***-->
 <!--# # # # # # # # # # -->
 <div id="content">
+
 <?php
 define('GW_UPLOADPATH', 'images/');
 // Connect to the database
@@ -89,6 +112,7 @@ $score = $stmt->fetchall();
 // Loop through the array of score data, formatting it as HTML
 echo '<table>';
 foreach($score as $row) {
+<<<<<<< HEAD
     echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td><img src='images/" . $row['image'] . "'></td>
     <td>
         <button type='button'>
@@ -97,9 +121,13 @@ foreach($score as $row) {
             <span>0</span>
         </button>
     </td>";
+=======
+    echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td class='imageHolder'><img src='images/" . $row['image'] . "'></td> </tr>";
+>>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c
 }
 echo '</table>';
 ?>
+
     </div>
 <!--# # # # # # # # # #-->
 <!--#   FOOTER DIV    #-->

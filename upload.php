@@ -1,4 +1,16 @@
 <?php
+
+$username = 'kingtailor';
+$password = 'keyanpleb';
+if (!isset($_SERVER['PHP_AUTH_USER']) ||
+    !isset($_SERVER['PHP_AUTH_PW']) ||
+    ($_SERVER['PHP_AUTH_USER'] != $username) || ($_SERVER['PHP_AUTH_PW'] != $password)) {
+    header('HTTP/1.1 401 Unauthorized');
+    header('WWW-Authenticate: Basic realm= "Please enter the admin username and password"');
+    exit('<h2> You must be an administrator to access this page. </h2>');
+}
+
+
 session_start();
 error_reporting(0); // disables all error messages.
 ?>
@@ -55,11 +67,33 @@ error_reporting(0); // disables all error messages.
     </div>
     <br><br><br>
     <div id="navbar">
-        <ul>
-            <li><a href="testform.php">Quiz</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="index.php">Home</a></li>
-        </ul>
+        <?php
+        if($_COOKIE['logUser'] != null){
+            $query = "SELECT * FROM users WHERE username = :username1";
+            $stmt = $dbh->prepare($query);
+            $stmt->execute(array(
+                'username1' => $_SESSION['username1']
+            ));
+            $result= $stmt->fetchAll();
+
+            ?>
+            <ul>
+                <li><a href="feed.php">TheFeed</a></li>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }else{
+            ?>
+            <ul>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }
+        ?>
     </div>
 </header>
 <!--***  header end  ***-->
@@ -130,12 +164,19 @@ error_reporting(0); // disables all error messages.
 
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
-    $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category)";
+    $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category, :clothing)";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
+<<<<<<< HEAD
         'username1' => $_COOKIE['logUser'],
         'screenshot' => $new_picture,
         'category' => $_POST['category']
+=======
+    'username1' => $_COOKIE['logUser'],
+    'screenshot' => $new_picture,
+        'category' => $_POST['category'],
+        'clothing' => $_POST['clothing']
+>>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c
     ));
     // Confirm success with the user
     // echo '<p>Your profile has been successfully updated. Would you like to <a href="viewprofile.php">view your profile</a>?</p>';
@@ -161,12 +202,21 @@ error_reporting(0); // disables all error messages.
                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                 <input type="file" id="screenshot" name="screenshot"/>
                 <br>
+                Style Type
                 <select name="category">
                     <option value=""></option>
-                    <option value="socs">Socs </option>
-                    <option value="irises"> Irises </option>
-                    <option value="flyers"> Flyers </option>
-                    <option value="cazzies"> Cazzies </option>
+                    <option value="Socs">Socs </option>
+                    <option value="Irises"> Irises </option>
+                    <option value="Flyers"> Flyers </option>
+                    <option value="Cazzies"> Cazzies </option>
+                </select>
+                <br>
+                Type of Clothing
+                <select name="clothing">
+                    <option value=""></option>
+                    <option value="Shirt">Shirt</option>
+                    <option value="Pants">Pants</option>
+                    <option value="Shoes">Shoes</option>
                 </select>
                 <br>
                 <input type="submit" value="Share these clothes!" name="submit" />

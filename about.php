@@ -55,11 +55,33 @@ error_reporting(0); // disables all error messages.
     </div>
     <br><br><br>
     <div id="navbar">
+<?php
+    if($_COOKIE['logUser'] != null){
+        $query = "SELECT * FROM users WHERE username = :username1";
+        $stmt = $dbh->prepare($query);
+        $stmt->execute(array(
+            'username1' => $_SESSION['username1']
+        ));
+        $result= $stmt->fetchAll();
+
+        ?>
+        <ul>
+            <li><a href="feed.php">TheFeed</a></li>
+            <li><a href="testform.php">Quiz</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="index.php">Home</a></li>
+        </ul>
+        <?php
+            }else{
+        ?>
         <ul>
             <li><a href="testform.php">Quiz</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="index.php">Home</a></li>
         </ul>
+    <?php
+    }
+?>
     </div>
 </header>
 <!--***  header end  ***-->
@@ -72,7 +94,8 @@ error_reporting(0); // disables all error messages.
     <h1 style="font-size: 35px">For those who rule, Rule Well</h1>
     <h1 style="font-size: 55px; ">Long Live The Crowned</h1>
     <img style="width: 40%" src="https://s-media-cache-ak0.pinimg.com/736x/1a/7b/3e/1a7b3ec54bc6fa125d0bcb8f3b1adfd9.jpg">
-    <p>Welcome to Crown Tailor where we can help you find your style personality. Are you always stuck wondering about what to wear to show off your personality? Well look no further here at Crown Tailors we'll help you discover ways to show off your personality through a simple and short personality clothes that'll match you to your style.</p>
+    <p>Welcome to Crown Tailor
+        where we can help you find your style personality. Are you always stuck wondering about what to wear to show off your personality? Well look no further here at Crown Tailors we'll help you discover ways to show off your personality through a simple and short personality clothes that'll match you to your style.</p>
     <p>Crown Tailor was founded by Andy, Zach, Brendan and Keyan in May of 2016. Originally located within the START @ West-MEC building in the Grand Canyon State of Arizona, this Glendale Office Building/School. Crowned Tailor shared its home with about 5 other businesses, most of them also being start-ups.</p>
     <img style="width: 5%;" src="images/CT-Logo2.png">
 </div>
@@ -86,9 +109,10 @@ error_reporting(0); // disables all error messages.
     </div>
     <div id="lowLinks">
         <a href="index.php">Home</a>
-        <a href="admin.php">Mng Website</a>
         <a href="account.php">Sign-In</a>
         <a href="about.php">About Us</a>
+        <a href="upload.php">Sponsor Page</a>
+        <a href="admin.php">Admin</a>
         <img src="images/CT-Logo2.png">
     </div>
 </footer>

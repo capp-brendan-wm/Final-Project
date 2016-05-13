@@ -68,11 +68,33 @@ error_reporting(0); // disables all error messages.
     </div>
     <br><br><br>
     <div id="navbar">
-        <ul>
-            <li><a href="testform.php">Quiz</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="index.php">Home</a></li>
-        </ul>
+        <?php
+        if($_COOKIE['logUser'] != null){
+            $query = "SELECT * FROM users WHERE username = :username1";
+            $stmt = $dbh->prepare($query);
+            $stmt->execute(array(
+                'username1' => $_SESSION['username1']
+            ));
+            $result= $stmt->fetchAll();
+
+            ?>
+            <ul>
+                <li><a href="feed.php">TheFeed</a></li>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }else{
+            ?>
+            <ul>
+                <li><a href="testform.php">Quiz</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+            <?php
+        }
+        ?>
     </div>
 </header>
 <!--***  header end  ***-->
@@ -108,19 +130,15 @@ $result = $stmt->fetchAll();
 foreach ($result as $row) {
 
 
-        $confirm = $row['user_id'];
-
-
-
     echo " <tr>
     <td class='admintable'>Account id: " . $row['user_id'] . " </td>
     <td class='admintable'>Account Email " . $row['email'] . " </td>
     <td class='admintable'>Account Username: " . $row['username'] . " </td>
     <td class='admintable'>Account Password: " . $row['password'] . " </td>
-    <td class='admintable'><a href='admin.php?remove=". $row['user_id'] . "'>Remove user</a></td>";
+    <td class='admintable'><a href='admin.php?remove=". $row['id'] . "'>Remove user</a></td>";
 
-       if ($_GET['remove'] == $row['user_id']) {
-           $_SESSION['user_id'] = $row['user_id'];
+       if ($_GET['remove'] == $row['id']) {
+           $_SESSION['id'] = $row['id'];
            echo "<td class='admintable'>Confirm? <a href='admin.php?confirm=yes'>Yes </a><a href='admin.php?confirm=no'> No</a> </td>";
        }
     echo "</tr>";
@@ -138,9 +156,10 @@ foreach ($result as $row) {
     </div>
     <div id="lowLinks">
         <a href="index.php">Home</a>
-        <a href="admin.php">Mng Website</a>
         <a href="account.php">Sign-In</a>
         <a href="about.php">About Us</a>
+        <a href="upload.php">Sponsor Page</a>
+        <a href="admin.php">Admin</a>
         <img src="images/CT-Logo2.png">
     </div>
 </footer>

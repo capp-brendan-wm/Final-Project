@@ -114,7 +114,7 @@ header{
     background-color: #ffffff;
     width: 80%;
     margin-top: 120px;
-    margin-bottom: 75px;
+    margin-bottom: 50px;
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -131,23 +131,24 @@ header{
 footer{
     text-align: center;
     font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 500;
     line-height: 1px;
     color: #555555;
 }
 #lowLinks a{
     font: normal 16px/normal 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 20px;
     display: block;
     text-align: center;
-    padding: 14px 16px;
+    padding: 6px 16px;
     text-decoration: none;
     color: #694501;
 }
 #lowLinks img{
+    margin-top: 25px;
     height: 75px;
 }
 .admintable {
@@ -155,6 +156,7 @@ footer{
     border-style: solid;
     background-color: lightgray;
 }
+<<<<<<< HEAD
 /**************//******************//**************/
 /**************//**  OTHER STUFF **//**************/
 /**************//******************//**************/
@@ -222,3 +224,9 @@ button span:after {
     border-right: 8px solid transparent;
     border-top: 8px solid #84d9ff;
 }
+=======
+.imageHolder {
+    width: 200px;
+    height: 200px;
+}
+>>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c
