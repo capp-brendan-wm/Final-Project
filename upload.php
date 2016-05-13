@@ -238,7 +238,7 @@ else {
     echo "  <a href=\"feed.php\"> See what others' posted </a>";
 }
 ?>
-
+<!-- Ya'll suck -->
 
 </div>
 <!--***  content end  ***-->
