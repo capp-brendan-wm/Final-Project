@@ -322,3 +322,7 @@ footer{
     background-color: #73ce00;
 }
 
+.imageHolder {
+    width: 200px;
+    height: 200px;
+}
