@@ -167,10 +167,16 @@ error_reporting(0); // disables all error messages.
     $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category, :clothing)";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
+<<<<<<< HEAD
+        'username1' => $_COOKIE['logUser'],
+        'screenshot' => $new_picture,
+        'category' => $_POST['category']
+=======
     'username1' => $_COOKIE['logUser'],
     'screenshot' => $new_picture,
         'category' => $_POST['category'],
         'clothing' => $_POST['clothing']
+>>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c
     ));
     // Confirm success with the user
     // echo '<p>Your profile has been successfully updated. Would you like to <a href="viewprofile.php">view your profile</a>?</p>';

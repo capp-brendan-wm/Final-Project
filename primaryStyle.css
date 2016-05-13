@@ -156,3 +156,77 @@ footer{
     border-style: solid;
     background-color: lightgray;
 }
+<<<<<<< HEAD
+/**************//******************//**************/
+/**************//**  OTHER STUFF **//**************/
+/**************//******************//**************/
+
+button {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 90px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 0;
+    font-size: .9rem;
+    font-family: Futura;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+button:hover {
+    color: #84d9ff;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+button:hover span {
+    opacity: 1;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+button:active {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+}
+button span {
+    position: absolute;
+    top: -55px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #84d9ff;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    border-radius: 100px;
+    opacity: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+button span:hover {
+    opacity: 1;
+}
+button span:after {
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #84d9ff;
+}
+=======
+.imageHolder {
+    width: 200px;
+    height: 200px;
+}
+>>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c

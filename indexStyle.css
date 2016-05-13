@@ -1399,3 +1399,11 @@ only screen and (                max-resolution: 2dppx)  and (max-width: 480px) 
         display: none;
     }
 }
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+/* Declaring Variables */
+/* Mixins allows you to make group of CSS declarations */
+/* Inheritance feature in SCSS */
+.img-margin, .img-unsplash {
+    margin-bottom: 20px;
+}
