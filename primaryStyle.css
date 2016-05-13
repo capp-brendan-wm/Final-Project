@@ -208,10 +208,12 @@ footer{
 
 .text_like {
     display: inline;
+    color: #555555;
 }
 
 .text_liked {
     display: none;
+    color: #616161;
 }
 
 .button_text_light, .button_light {
@@ -267,15 +269,15 @@ footer{
 }
 
 .button_clear_green {
-    color: #73ce00;
+    color: transparent;
     background: #fff;
-    border: 1px solid #73ce00;
+    border: 1px solid transparent;
 }
 .button_clear_green .heart {
-    color: #73ce00;
+    color: transparent;
 }
 .button_clear_green:hover {
-    border-color: #579b00;
+    border-color: transparent;
 }
 
 .button_text_green {
@@ -296,12 +298,12 @@ footer{
 
 .button.selected {
     color: #fff;
-    background-color: #73ce00;
-    border: 1px solid #73ce00;
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 .button.selected .heart {
-    color: #fff;
-    background-color: #fff;
+    color: #e9b84b;
+    background-color: #e9b84b;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -313,12 +315,12 @@ footer{
 }
 
 .button.button_text.selected {
-    color: #73ce00;
+    color: transparent;
     background: transparent;
     border: none;
 }
 .button.button_text.selected .heart {
-    color: #73ce00;
-    background-color: #73ce00;
+    color: transparent;
+    background-color: transparent;
 }
 
