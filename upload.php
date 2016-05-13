@@ -1,5 +1,6 @@
 <?php
 
+//Only authorized users can access this page
 $username = 'kingtailor';
 $password = 'keyanpleb';
 if (!isset($_SERVER['PHP_AUTH_USER']) ||
@@ -9,8 +10,6 @@ if (!isset($_SERVER['PHP_AUTH_USER']) ||
     header('WWW-Authenticate: Basic realm= "Please enter the admin username and password"');
     exit('<h2> You must be an administrator to access this page. </h2>');
 }
-
-
 session_start();
 error_reporting(0); // disables all error messages.
 ?>
@@ -34,9 +33,9 @@ error_reporting(0); // disables all error messages.
         <br>
         <div id="signIn">
             <?php
+            //if user is currently logged in
             if($_COOKIE['logUser'] != null){
                 $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
                 $query = "SELECT * FROM users WHERE username = :username1";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(
@@ -55,7 +54,7 @@ error_reporting(0); // disables all error messages.
                     <li><a href="account.php"><?php echo $_COOKIE['logUser']?></a></li>
                 </ul>
                 <?php
-            }else{
+            }else{ // if user is not logged in
                 ?>
                 <ul>
                     <li><a href="account.php">Sign In</a></li>
@@ -68,14 +67,8 @@ error_reporting(0); // disables all error messages.
     <br><br><br>
     <div id="navbar">
         <?php
+        //If user is logged in, display the feed page
         if($_COOKIE['logUser'] != null){
-            $query = "SELECT * FROM users WHERE username = :username1";
-            $stmt = $dbh->prepare($query);
-            $stmt->execute(array(
-                'username1' => $_SESSION['username1']
-            ));
-            $result= $stmt->fetchAll();
-
             ?>
             <ul>
                 <li><a href="feed.php">TheFeed</a></li>
@@ -84,7 +77,7 @@ error_reporting(0); // disables all error messages.
                 <li><a href="index.php">Home</a></li>
             </ul>
             <?php
-        }else{
+        }else{ //do not show the feed page.
             ?>
             <ul>
                 <li><a href="testform.php">Quiz</a></li>
@@ -110,6 +103,7 @@ error_reporting(0); // disables all error messages.
 <?php
 
     if ($_SESSION['loggedIn'] == 1) {
+        //if user is logged in, display upload form
 
     define('MM_UPLOADPATH', 'images/');
     define('MM_MAXFILESIZE', 10000000);      //  KB
@@ -163,7 +157,6 @@ error_reporting(0); // disables all error messages.
     // Only set the picture column if there is a new picture
 
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
     $query = "INSERT INTO ct_uploads VALUES (0, :screenshot, :username1, :category, :clothing)";
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(
@@ -177,7 +170,6 @@ error_reporting(0); // disables all error messages.
     //exit();
     }
     $_POST['submit'] = null;
-    // header('location: account.php?fixit=true');
         echo "<h1> Your Clothing has been successfully uploaded! </h1>
   <a href=\"feed.php\"> See what others' posted </a>";
     } // End of check for form submission
@@ -215,24 +207,18 @@ error_reporting(0); // disables all error messages.
                 <br>
                 <input type="submit" value="Share these clothes!" name="submit" />
             </form>
-
         </div>
         <br>
         <br>
         <a href="feed.php"> See what others' posted </a>
         <?php
-
     }
-
-
-
 }
 else {
     echo "<h1> You must be logged in to upload images </h1>";
     echo "  <a href=\"feed.php\"> See what others' posted </a>";
 }
 ?>
-<!-- Ya'll suck -->
 
 </div>
 <!--***  content end  ***-->

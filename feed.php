@@ -22,9 +22,10 @@ error_reporting(0); // disables all error messages.
         <br>
         <div id="signIn">
             <?php
+            //if user is logged in, display user image and username
             if($_COOKIE['logUser'] != null){
-                $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
+                $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
                 $query = "SELECT * FROM users WHERE username = :username1";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(
@@ -57,13 +58,6 @@ error_reporting(0); // disables all error messages.
     <div id="navbar">
         <?php
         if($_COOKIE['logUser'] != null){
-            $query = "SELECT * FROM users WHERE username = :username1";
-            $stmt = $dbh->prepare($query);
-            $stmt->execute(array(
-                'username1' => $_SESSION['username1']
-            ));
-            $result= $stmt->fetchAll();
-
             ?>
             <ul>
                 <li><a href="feed.php">TheFeed</a></li>
@@ -89,6 +83,7 @@ error_reporting(0); // disables all error messages.
 <div id="content">
 
 <?php
+//display all clothing user entries.
 define('GW_UPLOADPATH', 'images/');
 // Connect to the database
 $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
