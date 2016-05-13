@@ -30,11 +30,10 @@
     }
 
 
-
+//If user is logged in, display the account page.
     if ($_SESSION['loggedIn'] == 1 && $_GET['signup'] != "true") {
 
         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
         $query = "SELECT * FROM users WHERE username = :username1";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
@@ -42,14 +41,12 @@
         ));
         $result= $stmt->fetchAll();
 
-
-
-
         define('MM_UPLOADPATH', 'images/');
         define('MM_MAXFILESIZE', 10000000);      //  KB
         define('MM_MAXIMGWIDTH', 1200);        //  pixels
         define('MM_MAXIMGHEIGHT', 1200);       //  pixels
 
+        //when the user submits the form
         if (isset($_POST['submit'])) {
             // Grab the profile data from the POST
             $username = trim($_POST['username']);
@@ -92,8 +89,6 @@
                         ' KB and ' . MM_MAXIMGWIDTH . 'x' . MM_MAXIMGHEIGHT . ' pixels in size.</p>';
                 }
             }
-
-
             // Update the profile data in the database
             if (!$error) {
                 if (!empty($username) && !empty($password) && !empty($email)) {
@@ -101,11 +96,7 @@
                     // Only set the picture column if there is a new picture
                     if (!empty($new_picture)) {
 
-
-
-
                         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
                         $query = "UPDATE users SET username = :username, email = :email, password = :password, " .
                             " prof_image = :new_picture WHERE username = :username1";
                         $stmt = $dbh->prepare($query);
@@ -119,10 +110,9 @@
                         $_COOKIE['logUser'] = $username;
                         $_SESSION['image'] = $new_picture;
                     }
+                    // If there is no new picture to upload
                     else {
-                        echo "it makes it here.";
                         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
                         $query = "UPDATE users SET username = :username, email = :email, password = :password " .
                             "WHERE username = :username1";
                         $stmt = $dbh->prepare($query);
@@ -134,26 +124,17 @@
                         ));
                         $_COOKIE['logUser'] = $username;
                     }
-
                     // Confirm success with the user
-                   // echo '<p>Your profile has been successfully updated. Would you like to <a href="viewprofile.php">view your profile</a>?</p>';
-                    //exit();
                 }
                 else {
                     echo '<p class="error">You must enter all of the profile data (the picture is optional).</p>';
                 }
             }
             $_POST['submit'] = null;
-           // header('location: account.php?fixit=true');
         } // End of check for form submission
 
-        else {
-            // Grab the profile data from the database
-
-        }
-
+        //select information about logged in user from the database
         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
         $query = "SELECT prof_image FROM users WHERE username = :username1";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
@@ -163,9 +144,9 @@
 
         foreach ($result as $row) {
             $_SESSION['image'] = $row['prof_image'];
-
         }
         ?>
+        <!-- If user is logged in then display form to update profile -->
         <div id="top" >
             My Account <a href="account.php?logout=true"> Logout</a>
         </div>
