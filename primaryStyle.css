@@ -156,77 +156,169 @@ footer{
     border-style: solid;
     background-color: lightgray;
 }
-<<<<<<< HEAD
 /**************//******************//**************/
 /**************//**  OTHER STUFF **//**************/
 /**************//******************//**************/
 
-button {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 90px;
-    height: 40px;
-    background: #FFFFFF;
-    border: 0;
-    font-size: .9rem;
-    font-family: Futura;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    cursor: pointer;
-    border-radius: 6px;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
-    outline: none;
+@-webkit-keyframes shine {
+    0% {
+        background-position: left top;
+    }
+    100% {
+        background-position: right bottom;
+    }
 }
-button:hover {
-    color: #84d9ff;
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-}
-button:hover span {
-    opacity: 1;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-button:active {
-    -webkit-transform: scale(1.4);
-    transform: scale(1.4);
-}
-button span {
-    position: absolute;
-    top: -55px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background: #84d9ff;
-    color: rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
-    border-radius: 100px;
-    opacity: 0;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-button span:hover {
-    opacity: 1;
-}
-button span:after {
-    position: absolute;
-    bottom: -7px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #84d9ff;
-}
-=======
-.imageHolder {
+.container {
     width: 200px;
-    height: 200px;
 }
->>>>>>> a5cad93dde4d7b09eda810fa686e6944b7f8be8c
+
+.test {
+    margin: 20px;
+    width: 60px;
+}
+
+.test_button {
+    float: left;
+    clear: both;
+}
+
+.test_text {
+    float: right;
+}
+
+.button,
+.button_text {
+    font-family: helvetica, arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    text-decoration: none;
+    padding: 6px 10px 6px 19px;
+    border-radius: 3px;
+    position: relative;
+    margin: 10px;
+}
+
+.heart {
+    font-size: 16px;
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+
+.text_like {
+    display: inline;
+}
+
+.text_liked {
+    display: none;
+}
+
+.button_text_light, .button_light {
+    color: #757a6f;
+}
+.button_text_light .heart, .button_light .heart {
+    color: #757a6f;
+}
+.button_text_light:hover:not(.selected) .heart, .button_light:hover:not(.selected) .heart {
+    color: #ee6356;
+    font-size: 19px;
+    top: 6px;
+    left: 4px;
+}
+.button_text_light.shine .heart, .shine.button_light .heart {
+    background: #ee6356;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.button_text_light.shine:hover:not(.selected) .heart, .shine.button_light:hover:not(.selected) .heart {
+    background: linear-gradient(45deg, #ee6356 20%, #fce3e1 25%, #ee6356 30%);
+    background-position: left top;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-size: 100px 1px;
+    -webkit-animation-name: shine;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.button_light {
+    background: #eef2ea;
+    border: 1px solid #cfd5ca;
+}
+
+.button_text_light_grey, .button_light_grey {
+    color: #757a6f;
+}
+.button_text_light_grey .heart, .button_light_grey .heart {
+    color: #757a6f;
+}
+.button_text_light_grey:hover .heart, .button_light_grey:hover .heart {
+    color: #ee6356;
+}
+
+.button_light_grey {
+    background: #eef2ea;
+    border: 1px solid #cfd5ca;
+}
+.button_light_grey:hover {
+    border-color: #9b9f96;
+}
+
+.button_clear_green {
+    color: #73ce00;
+    background: #fff;
+    border: 1px solid #73ce00;
+}
+.button_clear_green .heart {
+    color: #73ce00;
+}
+.button_clear_green:hover {
+    border-color: #579b00;
+}
+
+.button_text_green {
+    color: #757a6f;
+    background: #fff;
+}
+.button_clear_grey {
+    color: #757a6f;
+    background: #fff;
+    border: 1px solid #cfd5ca;
+}
+.button_text_grey .heart {
+    color: #ee6356;
+}
+.button_text_grey:hover:not(.selected) {
+    color: #0a1901;
+}
+
+.button.selected {
+    color: #fff;
+    background-color: #73ce00;
+    border: 1px solid #73ce00;
+}
+.button.selected .heart {
+    color: #fff;
+    background-color: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.button.selected .text_like {
+    display: none;
+}
+.button.selected .text_liked {
+    display: inline;
+}
+
+.button.button_text.selected {
+    color: #73ce00;
+    background: transparent;
+    border: none;
+}
+.button.button_text.selected .heart {
+    color: #73ce00;
+    background-color: #73ce00;
+}
+

@@ -8,6 +8,8 @@ error_reporting(0); // disables all error messages.
     <title>Crowned Tailor - Index</title>
     <link rel="icon" href="images/CT-icon.png">
     <link rel="stylesheet" type="text/css" href="primaryStyle.css">
+    <script src="jquery.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
 <!--###  body start  ###-->
@@ -100,7 +102,16 @@ error_reporting(0); // disables all error messages.
     // Loop through the array of score data, formatting it as HTML
     echo '<table>';
     foreach($score as $row) {
-        echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td class='imageHolder'><img src='images/" . $row['image'] . "'></td> </tr>";
+        echo "<tr> <td> Username:</td> <td>" . $row['username'] . "</td> <td>Category:</td> <td>" . $row['category'] . "</td> <td class='imageHolder'><img src='images/" . $row['image'] . "'></td><td>
+        <div class=\"container\">
+  <div class=\"test test_button\">
+    <a href=\"#\" class=\"button button_light shine\">
+      <span class=\"heart\">&hearts;</span>
+      <span class=\"text_like\">Like</span>
+      <span class=\"text_liked\">Liked</span>
+    </a>
+  </div>
+</div></td> </tr>";
     }
     echo '</table>';
     ?>
