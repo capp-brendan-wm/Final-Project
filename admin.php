@@ -1,5 +1,5 @@
 <?php
-
+//only administrators can access the page.
 $username = 'kingtailor';
 $password = 'keyanpleb';
 if (!isset($_SERVER['PHP_AUTH_USER']) ||
@@ -9,9 +9,6 @@ if (!isset($_SERVER['PHP_AUTH_USER']) ||
     header('WWW-Authenticate: Basic realm= "Please enter the admin username and password"');
     exit('<h2> You must be an administrator to access this page. </h2>');
 }
-
-
-
 session_start();
 error_reporting(0); // disables all error messages.
 ?>
@@ -35,9 +32,10 @@ error_reporting(0); // disables all error messages.
         <br>
         <div id="signIn">
             <?php
+            //if user is logged in, display the user image and
             if($_COOKIE['logUser'] != null){
-                $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
+                $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
                 $query = "SELECT * FROM users WHERE username = :username1";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(
@@ -70,13 +68,6 @@ error_reporting(0); // disables all error messages.
     <div id="navbar">
         <?php
         if($_COOKIE['logUser'] != null){
-            $query = "SELECT * FROM users WHERE username = :username1";
-            $stmt = $dbh->prepare($query);
-            $stmt->execute(array(
-                'username1' => $_SESSION['username1']
-            ));
-            $result= $stmt->fetchAll();
-
             ?>
             <ul>
                 <li><a href="feed.php">TheFeed</a></li>
@@ -105,30 +96,31 @@ error_reporting(0); // disables all error messages.
 
     <?php
 
+        // If admin clicked on user to remove, display confirmation message.
     if ($_GET['confirm'] == "yes") {
-        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
+        $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
         $query = "DELETE FROM users WHERE user_id = :user_id";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
             'user_id' => $_SESSION['user_id']
         ));
     }
+    // If they choose no, hide confirm message
     if ($_GET['confirm'] == "no") {
     header("location: admin.php");
     }
 
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-
-$query = "SELECT * FROM users";
-$stmt = $dbh->prepare($query);
-$stmt->execute();
-$result = $stmt->fetchAll();
+    $query = "SELECT * FROM users";
+    $stmt = $dbh->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
 
 
     echo "<table>";
 foreach ($result as $row) {
-
+//echo all users
 
     echo " <tr>
     <td class='admintable'>Account id: " . $row['user_id'] . " </td>
@@ -137,6 +129,7 @@ foreach ($result as $row) {
     <td class='admintable'>Account Password: " . $row['password'] . " </td>
     <td class='admintable'><a href='admin.php?remove=". $row['id'] . "'>Remove user</a></td>";
 
+    //if admin clicked on remove, display confirm message
        if ($_GET['remove'] == $row['id']) {
            $_SESSION['id'] = $row['id'];
            echo "<td class='admintable'>Confirm? <a href='admin.php?confirm=yes'>Yes </a><a href='admin.php?confirm=no'> No</a> </td>";

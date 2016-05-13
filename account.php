@@ -179,13 +179,13 @@
 
         </div>
         <?php
-    } //end
+    } //end of account page
 
 
 
 
 
-
+//if user is not logged in and is not signing up
     if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] != "true") {
         ?>
         <!-- Displpay this html if not logged in -->
@@ -198,10 +198,9 @@
         </form>
         <h2> Don't have an account, <a href="account.php?signup=true" >Make one! </a> </h2>
         <?php
-        //not logged in
         if ($_POST['username1'] != null && $_POST['password1'] != null) {
-            $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
 
+            $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
             $query = "SELECT * FROM users WHERE username = :username1 AND password = :password1";
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(
@@ -221,21 +220,13 @@
                 echo "<h3> You must enter a valid username and password. </h3>";
             }
         }
+    }// end of login page
 
 
-
-    }
-
-
-
-
-
-
-    //$_SESSION['loggedIn'] = 0;
-
-
+    // if user is not logged in and user is logged in.
     if ($_SESSION['loggedIn'] == 0 && $_GET['signup'] == "true") {
         ?>
+        <!-- sign up form -->
         <h1> Sign up </h1>
         <form method="post">
             Email: <input type="text" placeholder="email" name="email3"><br>
@@ -249,7 +240,6 @@
 
         if ($_POST['username3'] != null && $_POST['password3']) {
             $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-//Write the data to the database
             $query = "INSERT INTO users VALUES (0, :email3, :username3, :password3, NULL )";
             $stmt = $dbh->prepare($query);
             $result = $stmt->execute(
