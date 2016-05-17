@@ -252,7 +252,8 @@
             if ($result) {
                 $_SESSION['loggedIn'] = 1;
                 $_SESSION['username1'] = $_POST['username3'];
-                header('Location: account.php');
+                setcookie('logUser', $_POST['username3']);
+                header('Location: index.php');
             }
             else {
                 echo "There was a problem entering your information. (Maybe username is already taken?) ";

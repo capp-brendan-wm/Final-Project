@@ -1,7 +1,7 @@
 <?php
 
-$username = 'kingtailor';
-$password = 'keyanpleb';
+$username = 'business_admin';
+$password = 'business_admin';
 if (!isset($_SERVER['PHP_AUTH_USER']) ||
     !isset($_SERVER['PHP_AUTH_PW']) ||
     ($_SERVER['PHP_AUTH_USER'] != $username) || ($_SERVER['PHP_AUTH_PW'] != $password)) {

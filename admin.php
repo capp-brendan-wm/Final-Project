@@ -1,7 +1,7 @@
 <?php
 //only administrators can access the page.
-$username = 'kingtailor';
-$password = 'keyanpleb';
+$username = 'admin';
+$password = 'admin';
 if (!isset($_SERVER['PHP_AUTH_USER']) ||
     !isset($_SERVER['PHP_AUTH_PW']) ||
     ($_SERVER['PHP_AUTH_USER'] != $username) || ($_SERVER['PHP_AUTH_PW'] != $password)) {
@@ -100,10 +100,10 @@ error_reporting(0); // disables all error messages.
     if ($_GET['confirm'] == "yes") {
 
         $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
-        $query = "DELETE FROM users WHERE user_id = :user_id";
+        $query = "DELETE FROM users WHERE id = :user_id";
         $stmt = $dbh->prepare($query);
         $stmt->execute(array(
-            'user_id' => $_SESSION['user_id']
+            'user_id' => $_SESSION['id']
         ));
     }
     // If they choose no, hide confirm message
