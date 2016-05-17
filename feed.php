@@ -95,7 +95,7 @@ error_reporting(0); // disables all error messages.
     // Connect to the database
     $dbh = new PDO('mysql:host=localhost;dbname=ct.db', 'root', 'root');
     // Retrieve the score data from MySQL
-    $query = "SELECT * FROM ct_uploads ORDER BY id_ct_submitions DESC";
+    $query = "SELECT * FROM ct_uploads ORDER BY id_ct_submissions DESC";
     $stmt = $dbh->prepare($query);
     $stmt->execute();
     $score = $stmt->fetchall();
